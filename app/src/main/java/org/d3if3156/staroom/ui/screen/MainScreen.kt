@@ -6,8 +6,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -16,7 +18,9 @@ import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -58,6 +62,7 @@ import org.d3if3156.staroom.database.StarDb
 import org.d3if3156.staroom.model.Star
 import org.d3if3156.staroom.navigation.Screen
 import org.d3if3156.staroom.ui.theme.STAROOMTheme
+import org.d3if3156.staroom.util.SettingsDataStore
 import org.d3if3156.staroom.util.ViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -73,12 +78,12 @@ fun MainScreen(navController: NavHostController) {
             TopAppBar(
                 navigationIcon = {
                     IconButton(onClick = {
-                        navController.navigate(Screen.Developer.route)
+                        navController.popBackStack()
                     }
                     ) {
                         Icon(
-                            imageVector = Icons.Outlined.AccountCircle,
-                            contentDescription = stringResource(R.string.developer),
+                            imageVector = Icons.Outlined.ArrowBack,
+                            contentDescription = stringResource(R.string.kembali),
                             tint = MaterialTheme.colorScheme.inverseOnSurface
                         )
                     }
@@ -121,14 +126,22 @@ fun MainScreen(navController: NavHostController) {
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = {
-                navController.navigate(Screen.FormStar.route)
-            }
-            ) {
-                Icon(imageVector = Icons.Filled.Add,
-                    contentDescription = stringResource(R.string.tambahstar),
-                    tint = MaterialTheme.colorScheme.primary)
-
+            Column {
+                FloatingActionButton(onClick = {
+                    navController.navigate(Screen.Nakostar.route)
+                }) {
+                    Icon(imageVector = Icons.Filled.Star,
+                        contentDescription = stringResource(R.string.tambahstar),
+                        tint = MaterialTheme.colorScheme.primary)
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                FloatingActionButton(onClick = {
+                    navController.navigate(Screen.FormStar.route)
+                }) {
+                    Icon(imageVector = Icons.Filled.Add,
+                        contentDescription = stringResource(R.string.tambahstar),
+                        tint = MaterialTheme.colorScheme.primary)
+                }
             }
         }
     ) { padding ->
