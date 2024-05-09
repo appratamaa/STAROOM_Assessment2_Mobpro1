@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">STAROOM</string>
+
+    <string name="listkosong">Belum ada data</string>
+    <string name="diklik">%1$s</string>
+
+    <string name="tambahstar">Tambah Star</string>
+    <string name="kembali">Kembali</string>
+    <string name="simpan">Simpan</string>
+
+    <string name="nama">Nama</string>
+    <string name="tanggal">Tanggal Lahir</string>
+
+    <string name="editstar">Ubah star</string>
+    <string name="invalid">Nama, Tanggal Lahir, dan Zodiak tidak boleh kosong</string>
+    <string name="lainnya">Opsi lainnya</string>
+    <string name="hapus">Hapus</string>
+
+    <string name="pesanhapus">Hapus data ini?</string>
+    <string name="tombolhapus">Hapus</string>
+    <string name="tombolbatal">Batal</string>
+
+    <string name="list">Tampilan list</string>
+    <string name="grid">Tampilan grid</string>
 </resources>
