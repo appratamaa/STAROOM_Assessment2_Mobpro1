@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.d3if3156.staroom.database.StarDao
+import org.d3if3156.staroom.model.Star
 
 class DetailViewModel(private val dao: StarDao) : ViewModel() {
 

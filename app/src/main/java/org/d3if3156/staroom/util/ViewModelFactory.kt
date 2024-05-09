@@ -2,6 +2,9 @@ package org.d3if3156.staroom.util
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import org.d3if3156.staroom.database.StarDao
+import org.d3if3156.staroom.ui.screen.DetailViewModel
+import org.d3if3156.staroom.ui.screen.MainViewModel
 
 class ViewModelFactory (
     private val dao: StarDao
