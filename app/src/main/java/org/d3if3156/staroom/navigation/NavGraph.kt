@@ -1,6 +1,14 @@
 package org.d3if3156.staroom.navigation
 
+import android.window.SplashScreen
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import org.d3if3156.staroom.ui.screen.DetailScreen
+import org.d3if3156.staroom.ui.screen.MainScreen
 
 @Composable
 fun SetupNavGraph(navController: NavHostController = rememberNavController()) {
