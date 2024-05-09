@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import org.d3if3156.staroom.model.Star
 
 @Database(entities = [Star::class], version = 1, exportSchema = false)
 abstract class StarDb : RoomDatabase() {

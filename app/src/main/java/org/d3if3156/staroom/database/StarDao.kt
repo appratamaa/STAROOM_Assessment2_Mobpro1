@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
+import org.d3if3156.staroom.model.Star
 
 @Dao
 interface StarDao {

@@ -1,5 +1,8 @@
 package org.d3if3156.staroom.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 @Entity(tableName = "star")
 data class Star(
     @PrimaryKey(autoGenerate = true)

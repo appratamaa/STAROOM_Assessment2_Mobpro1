@@ -1,5 +1,7 @@
 package org.d3if3156.staroom.navigation
 
+import org.d3if3156.staroom.ui.screen.KEY_ID_STAR
+
 sealed class Screen(val route: String) {
     data object Splash: Screen("splashscreen")
     data object Home: Screen("mainscreen")

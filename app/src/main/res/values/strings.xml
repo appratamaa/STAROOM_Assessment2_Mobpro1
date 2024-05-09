@@ -22,4 +22,46 @@
 
     <string name="list">Tampilan list</string>
     <string name="grid">Tampilan grid</string>
+
+    <string name="intro">Hi, what\'s your zodiac sign? Come on, predict yourself!</string>
+
+    <string name="name">Name</string>
+    <string name="zodiak">Zodiac</string>
+
+    <string name="pria">Male</string>
+    <string name="wanita">Female</string>
+
+    <string name="ramal">Predict</string>
+    <string name="percaya">I Trust!</string>
+    <string name="tidak">I Don\'t Trust!</string>
+    <string name="bagikan">Share Your Luck</string>
+
+    <string name="Taurus">There will be good opportunities offered to you. Don\'t waste it. But also remember to carefully consider the pros and cons</string>
+    <string name="Leo">Your leadership qualities should not make you look down on others. Respect others as they respect you. Each person has their own abilities and capacities</string>
+    <string name="Capricorn">Because of your hard work, now your business has become more successful. Keep trying as hard as possible to make it more than now. Create targets that you want to achieve in the near future</string>
+    <string name="Sagittarius">You need to know when to be serious and when to relax. Don\'t mix situations and conditions at the office. This could backfire on you</string>
+    <string name="Aquarius">Don\'t let yourself be underestimated for too long. Prove it to those who look down on you with success in the project you are currently holding. Make your boss glance at you</string>
+    <string name="Cancer">There will be a time when your boss will see your potential. Don\'t give up and try as hard as possible. Believe me, there will be a promotion waiting for you in the future</string>
+    <string name="Scorpio">Don\'t use your leadership spirit to patronize others. Trust your coworkers\' abilities. Like they also believe in you</string>
+    <string name="Gemini">You are very ambitious when it comes to work. You are very passionate about doing your work. Don\'t let this backfire on yourself</string>
+    <string name="Libra">Look for new job opportunities through your old friends. A job that doesn\'t make you forget the world. Occasionally look for information on the websites of your dream companies</string>
+    <string name="Pisces">The atmosphere of the work environment has a big influence on the mood at work. Create good relationships with colleagues and superiors. So that you always enjoy your time at the office</string>
+    <string name="Aries">You are easy to get along with. So you don\'t encounter problems when adapting to a new work environment. Many colleagues welcome your arrival</string>
+    <string name="Virgo">Actually, in your current job you can explore more falls. Dare to ask colleagues or superiors. This will make you enjoy your work even more</string>
+
+    <string name="about">ABOUT</string>
+    <string name="home">Home</string>
+    <string name="notifikasi">Notication</string>
+    <string name="developer">DEVELOPER</string>
+
+    <string name="apps">NAKOSTAR is an application developed by Anak Kos and Star which means Star\nThis is a sub application of NAKOS\nThis application is only for entertainment to predict yourself based on the zodiac or stars\nThis application is to fulfill Mobile Device Programming Assessment 1</string>
+    <string name="copyright">\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n© Copyright 2024 Andre Putra Pratama \nAll Rights Reserved</string>
+    <string name="pemberitahuan">No notification</string>
+    <string name="template">Hi, I\'m %1$s my zodiac %2$s have tried the NAKOSTAR application.\nCome on, try your zodiac forecast.\nDownload the application only on PlayStore and AppStore.\nDon\'t forget to follow developer NAKOSTAR\'s Instagram!\nAt https://www.instagram.com/_eindrew</string>
+    <string name="andre">Hi, I\'m Andre Putra Pratama\n6706223156\n\nI am the developer of the NAKOSTAR application</string>
+    <string name="hasil">%1$s is a %2$s</string>
+
+    <string name="next">Next</string>
+    <string name="notif">NOTIFICATION</string>
+    <string name="gambar">Picture</string>
 </resources>
