@@ -66,7 +66,7 @@ import org.d3if3156.staroom.util.ViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(h, navController: NavHostController) {
+fun MainScreen(navController: NavHostController) {
     val poppinsblack = FontFamily(Font(R.font.poppinsblack))
 
     val dataStore = SettingsDataStore(LocalContext.current)
