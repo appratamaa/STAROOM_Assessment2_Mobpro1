@@ -21,7 +21,6 @@ fun DisplayAlertDialog(
     if (openDialog) {
         val poppinsbold = FontFamily(Font(R.font.poppinsbold))
         val poppinsregular = FontFamily(Font(R.font.poppinsregular))
-        val poppinslight = FontFamily(Font(R.font.poppinslight))
 
         AlertDialog(
             text = { Text(text = stringResource(R.string.pesanhapus),

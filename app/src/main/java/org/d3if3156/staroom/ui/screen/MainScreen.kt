@@ -2,6 +2,7 @@ package org.d3if3156.staroom.ui.screen
 
 import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,8 +20,7 @@ import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.outlined.AccountCircle
-import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -45,7 +45,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -78,13 +77,13 @@ fun MainScreen(navController: NavHostController) {
             TopAppBar(
                 navigationIcon = {
                     IconButton(onClick = {
-                        navController.popBackStack()
+                        navController.navigate(Screen.Developer.route)
                     }
                     ) {
                         Icon(
-                            imageVector = Icons.Outlined.ArrowBack,
-                            contentDescription = stringResource(R.string.kembali),
-                            tint = MaterialTheme.colorScheme.inverseOnSurface
+                            imageVector = Icons.Outlined.Person,
+                            contentDescription = stringResource(R.string.developer),
+                            tint = Color.White
                         )
                     }
                 },
@@ -96,7 +95,6 @@ fun MainScreen(navController: NavHostController) {
                         style = TextStyle(color = Color.White),
                         fontSize = 20.sp,
                         fontFamily = poppinsblack,
-                        fontWeight = FontWeight.Black
                     )
                 },
                 colors =  TopAppBarDefaults.mediumTopAppBarColors(
@@ -118,10 +116,9 @@ fun MainScreen(navController: NavHostController) {
                                 if (showList) R.string.grid
                                 else R.string.list
                             ),
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = Color.White
                         )
                     }
-
                 }
             )
         },
@@ -166,9 +163,11 @@ fun ScreenContent(showList: Boolean, modifier: Modifier, navController: NavHostC
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ){
+            val image = painterResource(id = R.drawable.emptydata)
+            Image(painter = image, contentDescription = null)
+            Spacer(modifier = Modifier.height(16.dp))
             Text(text = stringResource(id = R.string.listkosong),
                 fontFamily = poppinslight )
-
         }
     }
     else {
@@ -184,9 +183,7 @@ fun ScreenContent(showList: Boolean, modifier: Modifier, navController: NavHostC
                     }
                     Divider()
                 }
-
             }
-
         }
         else {
             LazyVerticalStaggeredGrid(
@@ -199,7 +196,6 @@ fun ScreenContent(showList: Boolean, modifier: Modifier, navController: NavHostC
                 items(data) {
                     GridItem(star = it) {
                         navController.navigate(Screen.FormUbah.withId(it.id))
-
                     }
                 }
             }

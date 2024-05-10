@@ -20,8 +20,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
-import androidx.compose.material.icons.outlined.AccountCircle
-import androidx.compose.material.icons.outlined.KeyboardArrowRight
+import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -48,12 +48,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import org.d3if3156.staroom.R
@@ -63,18 +67,20 @@ import org.d3if3156.staroom.ui.theme.STAROOMTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NakostarScreen(navController: NavHostController) {
+    val poppinsblack = FontFamily(Font(R.font.poppinsblack))
+
     Scaffold (
         topBar = {
             TopAppBar(
                 navigationIcon = {
                     IconButton(onClick = {
-                        navController.navigate(Screen.Developer.route)
+                        navController.popBackStack()
                     }
                     ) {
                         Icon(
-                            imageVector = Icons.Outlined.AccountCircle,
-                            contentDescription = stringResource(R.string.developer),
-                            tint = MaterialTheme.colorScheme.inverseOnSurface
+                            imageVector = Icons.Outlined.ArrowBack,
+                            contentDescription = stringResource(R.string.kembali),
+                            tint = Color.White
                         )
                     }
                 },
@@ -83,12 +89,13 @@ fun NakostarScreen(navController: NavHostController) {
                         text = stringResource(id = R.string.app_name),
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center,
-                        fontWeight = FontWeight.Black
+                        style = TextStyle(color = Color.White),
+                        fontSize = 20.sp,
+                        fontFamily = poppinsblack,
                     )
                 },
                 colors =  TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.scrim,
-                    titleContentColor = MaterialTheme.colorScheme.inverseOnSurface
+                    containerColor = Color.Black
                 ),
                 actions = {
                     IconButton(onClick = {
@@ -96,9 +103,9 @@ fun NakostarScreen(navController: NavHostController) {
                     }
                     ) {
                         Icon(
-                            imageVector = Icons.Outlined.KeyboardArrowRight,
+                            imageVector = Icons.Outlined.Info,
                             contentDescription = stringResource(R.string.next),
-                            tint = MaterialTheme.colorScheme.inverseOnSurface
+                            tint = Color.White
                         )
                     }
                 }
@@ -106,11 +113,13 @@ fun NakostarScreen(navController: NavHostController) {
         }
     ) { padding ->
         ScreenContent(Modifier.padding(padding))
-
     }
 }
 @Composable
 fun ScreenContent(modifier: Modifier) {
+    val poppinsbold = FontFamily(Font(R.font.poppinsbold))
+    val poppinsregular = FontFamily(Font(R.font.poppinsregular))
+
     var name by rememberSaveable { mutableStateOf("") }
     var nameError by rememberSaveable { mutableStateOf(false) }
     var zodiac by rememberSaveable { mutableStateOf("") }
@@ -141,11 +150,13 @@ fun ScreenContent(modifier: Modifier) {
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.fillMaxWidth(),
+            fontFamily = poppinsregular
         )
         OutlinedTextField(
             value = name,
             onValueChange = { name = it },
-            label = { Text(text = stringResource(R.string.name)) },
+            label = { Text(text = stringResource(R.string.name),
+                fontFamily = poppinsregular) },
             isError = nameError,
             trailingIcon = { IconPicker(nameError)},
             supportingText = { ErrorHint(nameError)},
@@ -155,11 +166,13 @@ fun ScreenContent(modifier: Modifier) {
                 imeAction = ImeAction.Next
             ),
             shape = RoundedCornerShape(30.dp),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            textStyle = TextStyle(fontFamily = poppinsregular)
         )
         OutlinedTextField(value = zodiac,
             onValueChange = { zodiac = it},
-            label = { Text(text = stringResource(R.string.zodiak)) },
+            label = { Text(text = stringResource(R.string.zodiak),
+                fontFamily = poppinsregular) },
             isError = zodiacError,
             trailingIcon = { IconPicker(zodiacError)},
             supportingText = { ErrorHint(zodiacError)},
@@ -169,7 +182,8 @@ fun ScreenContent(modifier: Modifier) {
                 imeAction = ImeAction.Done
             ),
             shape = RoundedCornerShape(30.dp),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            textStyle = TextStyle(fontFamily = poppinsregular)
         )
         Row (
             modifier = Modifier
@@ -202,7 +216,8 @@ fun ScreenContent(modifier: Modifier) {
         Text(
             text = if (isChecked) stringResource(R.string.percaya) else stringResource(R.string.tidak),
             style = MaterialTheme.typography.labelSmall,
-            color = Color.Red
+            color = Color.Red,
+            fontFamily = poppinsregular
         )
         Button(
             onClick = {
@@ -218,7 +233,7 @@ fun ScreenContent(modifier: Modifier) {
         ) {
             Text(
                 text = stringResource(R.string.ramal),
-                fontWeight = FontWeight.ExtraBold
+                fontFamily = poppinsbold
             )
         }
         if (kondisi == true) {
@@ -253,12 +268,13 @@ fun ScreenContent(modifier: Modifier) {
             Text(
                 text = stringResource(R.string.hasil, name, stringResource(id = getGender(gender == radioOptions[0]))),
                 style = MaterialTheme.typography.titleSmall,
-                fontWeight = FontWeight.Bold
+                fontFamily = poppinsbold
             )
             Text(
                 text = stringResource(id = kategori).capitalize(),
                 style = MaterialTheme.typography.bodySmall,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                fontFamily = poppinsregular
             )
         }
         Button(onClick = {
@@ -272,13 +288,15 @@ fun ScreenContent(modifier: Modifier) {
             contentPadding = PaddingValues(horizontal = 32.dp, vertical = 8.dp)
         ) {
             Text(text = stringResource(R.string.bagikan),
-                fontWeight = FontWeight.ExtraBold
+                fontFamily = poppinsbold
             )
         }
     }
 }
 @Composable
 fun GenderOption(label: String, isSelected: Boolean, modifier: Modifier) {
+    val poppinsregular = FontFamily(Font(R.font.poppinsregular))
+
     Row (
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
@@ -286,7 +304,8 @@ fun GenderOption(label: String, isSelected: Boolean, modifier: Modifier) {
         RadioButton(selected = isSelected, onClick = null)
         Text(text = label,
             style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.padding(start = 8.dp)
+            modifier = Modifier.padding(start = 8.dp),
+            fontFamily = poppinsregular
         )
     }
 }
@@ -307,7 +326,7 @@ private fun getZodiak(zodiacs: String, isMale: Boolean): Int {
             zodiacs.equals("Pisces", true) -> R.string.Pisces
             zodiacs.equals("Aries", true) -> R.string.Aries
             zodiacs.equals("Virgo", true) -> R.string.Virgo
-            else -> R.string.invalid
+            else -> R.string.invalidnakostar
         }
     } else {
         kategori = when {
@@ -323,13 +342,12 @@ private fun getZodiak(zodiacs: String, isMale: Boolean): Int {
             zodiacs.equals("Pisces", true) -> R.string.Pisces
             zodiacs.equals("Aries", true) -> R.string.Aries
             zodiacs.equals("Virgo", true) -> R.string.Virgo
-            else -> R.string.invalid
+            else -> R.string.invalidnakostar
         }
     }
 
     return kategori
 }
-
 private fun getGender(isMale: Boolean): Int {
     var gender = 0
     if (isMale) gender = R.string.pria else gender = R.string.wanita
@@ -353,9 +371,12 @@ fun IconPicker(isError: Boolean) {
 }
 @Composable
 fun ErrorHint(isError: Boolean) {
+    val poppinsregular = FontFamily(Font(R.font.poppinsregular))
+
     if (isError) {
-        Text(text = stringResource(R.string.invalid),
-            color = Color.Red)
+        Text(text = stringResource(R.string.invalidnakostar),
+            color = Color.Red,
+            fontFamily = poppinsregular)
     }
 }
 @Preview(showBackground = true)

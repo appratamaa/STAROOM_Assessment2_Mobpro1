@@ -1,29 +1,11 @@
 <resources>
     <string name="app_name">STAROOM</string>
 
-    <string name="listkosong">Belum ada data</string>
     <string name="diklik">%1$s</string>
 
-    <string name="tambahstar">Tambah Star</string>
-    <string name="kembali">Kembali</string>
-    <string name="simpan">Simpan</string>
+    <string name="tanggal">Birth Date</string>
 
-    <string name="nama">Nama</string>
-    <string name="tanggal">Tanggal Lahir</string>
-
-    <string name="editstar">Ubah star</string>
-    <string name="invalid">Nama, Tanggal Lahir, dan Zodiak tidak boleh kosong</string>
-    <string name="lainnya">Opsi lainnya</string>
-    <string name="hapus">Hapus</string>
-
-    <string name="pesanhapus">Hapus data ini?</string>
-    <string name="tombolhapus">Hapus</string>
-    <string name="tombolbatal">Batal</string>
-
-    <string name="list">Tampilan list</string>
-    <string name="grid">Tampilan grid</string>
-
-    <string name="intro">Hi, what\'s your zodiac sign? Come on, predict yourself!</string>
+    <string name="editstar">Change Data</string>
 
     <string name="name">Name</string>
     <string name="zodiak">Zodiac</string>
@@ -49,19 +31,35 @@
     <string name="Aries">You are easy to get along with. So you don\'t encounter problems when adapting to a new work environment. Many colleagues welcome your arrival</string>
     <string name="Virgo">Actually, in your current job you can explore more falls. Dare to ask colleagues or superiors. This will make you enjoy your work even more</string>
 
-    <string name="about">ABOUT</string>
+    <string name="about">About</string>
     <string name="home">Home</string>
     <string name="notifikasi">Notication</string>
-    <string name="developer">DEVELOPER</string>
+    <string name="developer">Developer</string>
 
-    <string name="apps">NAKOSTAR is an application developed by Anak Kos and Star which means Star\nThis is a sub application of NAKOS\nThis application is only for entertainment to predict yourself based on the zodiac or stars\nThis application is to fulfill Mobile Device Programming Assessment 1</string>
+    <string name="apps">STAROOM is an x NAKOSTAR zodiac forecast application that can store various personal and other people\'s zodiac signs or stars and can access NAKOSTAR features.\nThis is a sub application of NAKOS\nThis application is only for entertainment to predict and save your zodiac.\nThis application is to fulfill Mobile Device Programming Assessment 2</string>
     <string name="copyright">\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n© Copyright 2024 Andre Putra Pratama \nAll Rights Reserved</string>
     <string name="pemberitahuan">No notification</string>
-    <string name="template">Hi, I\'m %1$s my zodiac %2$s have tried the NAKOSTAR application.\nCome on, try your zodiac forecast.\nDownload the application only on PlayStore and AppStore.\nDon\'t forget to follow developer NAKOSTAR\'s Instagram!\nAt https://www.instagram.com/_eindrew</string>
-    <string name="andre">Hi, I\'m Andre Putra Pratama\n6706223156\n\nI am the developer of the NAKOSTAR application</string>
+    <string name="template">Hi, I\'m %1$s my zodiac %2$s have tried the STAROOM x NAKOSTAR application.\nCome on, try your zodiac forecast and save your zodiac!.\nDownload the application only on PlayStore and AppStore.\nDon\'t forget to follow developer STAROOM x NAKOSTAR\'s Instagram!\nAt https://www.instagram.com/_eindrew\nNAKOS 2024</string>
+    <string name="andre">Hi, I\'m Andre Putra Pratama\n6706223156\n\nI am the developer of the STAROOM x NAKOSTAR application from NAKOS</string>
     <string name="hasil">%1$s is a %2$s</string>
 
     <string name="next">Next</string>
-    <string name="notif">NOTIFICATION</string>
+    <string name="notif">Notification</string>
     <string name="gambar">Picture</string>
+
+    <string name="listkosong">No data yet</string>
+    <string name="tambahstar">Add Star</string>
+    <string name="kembali">Back</string>
+    <string name="simpan">Save</string>
+    <string name="nama">Name</string>
+    <string name="invalid">Name, Date of Birth and Zodiac cannot be blank!</string>
+    <string name="lainnya">More options</string>
+    <string name="hapus">Delete</string>
+    <string name="pesanhapus">Delete this data?</string>
+    <string name="tombolhapus">Hapus</string>
+    <string name="tombolbatal">Cancel</string>
+    <string name="list">List view</string>
+    <string name="grid">Grid view</string>
+    <string name="intro">Hi, what\'s your zodiac sign? Come on, predict yourself!</string>
+    <string name="invalidnakostar">Name and Zodiac cannot be empty!</string>
 </resources>

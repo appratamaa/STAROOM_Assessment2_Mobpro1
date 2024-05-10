@@ -37,7 +37,6 @@ fun SplashScreen(navController: NavHostController) {
         }
         onDispose { }
     }
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -53,8 +52,6 @@ fun SplashScreen(navController: NavHostController) {
         }
     }
 }
-
-
 @Preview(showBackground = true)
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable

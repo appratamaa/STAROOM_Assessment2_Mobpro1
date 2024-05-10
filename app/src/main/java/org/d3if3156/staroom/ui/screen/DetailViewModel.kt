@@ -38,5 +38,4 @@ class DetailViewModel(private val dao: StarDao) : ViewModel() {
             dao.deleteById(id)
         }
     }
-
 }

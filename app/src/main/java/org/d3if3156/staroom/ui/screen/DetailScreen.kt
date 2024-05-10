@@ -20,7 +20,6 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
@@ -42,7 +41,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
@@ -92,9 +90,8 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = stringResource(R.string.kembali),
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = Color.White
                         )
-
                     }
                 },
                 title = {
@@ -105,10 +102,14 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                             textAlign = TextAlign.Center,
                             fontSize = 20.sp,
                             fontFamily = poppinsblack,
-                            fontWeight = FontWeight.Black
                         )
                     else
-                        Text(text = stringResource(id = R.string.editstar))
+                        Text(text = stringResource(id = R.string.editstar),
+                            style = TextStyle(color = Color.White),
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center,
+                            fontSize = 20.sp,
+                            fontFamily = poppinsblack,)
                 },
                 colors =  TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = Color.Black,
@@ -128,7 +129,7 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                         Icon(
                             imageVector = Icons.Outlined.Check,
                             contentDescription = stringResource(R.string.simpan),
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = Color.White
                         )
                     }
                     if (id != null) {
@@ -159,15 +160,13 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
 }
 @Composable
 fun DeleteAction(delete: () -> Unit) {
-    val poppinsregular = FontFamily(Font(R.font.poppinsregular))
-
     var expanded by remember { mutableStateOf(false) }
 
     IconButton(onClick = { expanded = true}) {
         Icon(
             imageVector = Icons.Filled.MoreVert,
             contentDescription = stringResource(R.string.lainnya),
-            tint = MaterialTheme.colorScheme.primary,
+            tint = Color.White
         )
         DropdownMenu(
             expanded = expanded,
@@ -181,7 +180,6 @@ fun DeleteAction(delete: () -> Unit) {
                     expanded = false
                     delete()
                 })
-
         }
     }
 }
@@ -193,6 +191,7 @@ fun FormStar(
     modifier: Modifier
 ) {
     val poppinsregular = FontFamily(Font(R.font.poppinsregular))
+
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -219,7 +218,7 @@ fun FormStar(
                     fontFamily = poppinsregular) },
                 keyboardOptions = KeyboardOptions(
                     capitalization = KeyboardCapitalization.Words,
-                    imeAction = ImeAction.Next
+                    imeAction = ImeAction.Done
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -258,13 +257,11 @@ fun FormStar(
                                 fontFamily = poppinsregular)
                         }
                     }
-
                 }
             }
         }
     }
 }
-
 @Preview(showBackground = true)
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
