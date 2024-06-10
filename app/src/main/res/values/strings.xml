@@ -63,4 +63,7 @@
     <string name="intro">Hi, what\'s your zodiac sign? Come on, predict yourself!</string>
     <string name="invalidnakostar">Name and Zodiac cannot be empty!</string>
     <string name="masukdengangoogle">Login with Google</string>
+    <string name="tutup">Close</string>
+    <string name="keluar">Logout</string>
+    <string name="profil">Profile</string>
 </resources>

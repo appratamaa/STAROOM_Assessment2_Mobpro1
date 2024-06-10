@@ -38,6 +38,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -52,10 +55,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.GetCredentialResponse
+import androidx.credentials.exceptions.ClearCredentialException
 import androidx.credentials.exceptions.GetCredentialException
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -85,17 +90,22 @@ fun MainScreen(navController: NavHostController) {
     val dataStore = SettingsDataStore(LocalContext.current)
     val showList by dataStore.layoutFlow.collectAsState(true)
 
+    var showDialog by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val dataStoreUser = UserDataStore(context)
+    val user by dataStoreUser.userFlow.collectAsState(User())
+
     Scaffold (
         topBar = {
             TopAppBar(
                 navigationIcon = {
                     IconButton(onClick = {
-                        navController.navigate(Screen.Developer.route)
+                        showDialog = true
                     }
                     ) {
                         Icon(
                             imageVector = Icons.Outlined.Person,
-                            contentDescription = stringResource(R.string.developer),
+                            contentDescription = stringResource(R.string.profil),
                             tint = Color.White
                         )
                     }
@@ -156,6 +166,18 @@ fun MainScreen(navController: NavHostController) {
         }
     ) { padding ->
         ScreenContent(showList, Modifier.padding(padding), navController)
+
+        if (showDialog) {
+            ProfilDialog(
+                user = user,
+                onDismissRequest = { showDialog = false },
+                onConfirmation = {
+                    CoroutineScope(Dispatchers.IO).launch { signOut(context, dataStoreUser) }
+                    showDialog = false
+                },
+                navController = navController // Pass the navController here
+            )
+        }
     }
 }
 @Composable
@@ -285,6 +307,56 @@ fun GridItem(star: Star, onClick: () -> Unit) {
                 fontFamily = poppinslight
             )
         }
+    }
+}
+private suspend fun signIn(context: Context, dataStore: UserDataStore): Boolean {
+    val googleIdOption = GetGoogleIdOption.Builder()
+        .setFilterByAuthorizedAccounts(false)
+        .setServerClientId(BuildConfig.API_KEY)
+        .build()
+
+    val request = GetCredentialRequest.Builder()
+        .addCredentialOption(googleIdOption)
+        .build()
+    return try {
+        val credentialManager = CredentialManager.create(context)
+        val result = credentialManager.getCredential(context, request)
+        handleSignIn(result, dataStore)
+        true
+    } catch (e: GetCredentialException) {
+        Log.e("SIGN-IN", "Error: ${e.errorMessage}")
+        false
+    }
+}
+private suspend fun handleSignIn(
+    result: GetCredentialResponse,
+    dataStore: UserDataStore) {
+    val credential = result.credential
+    if (credential is CustomCredential &&
+        credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
+        try {
+            val googleId = GoogleIdTokenCredential.createFrom(credential.data)
+            val nama = googleId.displayName ?: ""
+            val email = googleId.id
+            val photoUrl = googleId.profilePictureUri.toString()
+            dataStore.saveData(User(nama, email, photoUrl), isLoggedIn = true)
+        } catch (e: GoogleIdTokenParsingException) {
+            Log.e("SIGN-IN", "Error: ${e.message}")
+        }
+    }
+    else {
+        Log.e("SIGN-IN", "Error: unrecognized custom credential type.")
+    }
+}
+private suspend fun signOut(context: Context, dataStore: UserDataStore) {
+    try {
+        val credentialManager = CredentialManager.create(context)
+        credentialManager.clearCredentialState(
+            ClearCredentialStateRequest()
+        )
+        dataStore.saveData(User(), isLoggedIn = false)
+    } catch (e: ClearCredentialException) {
+        Log.e("SIGN-IN", "Error: ${e.errorMessage}")
     }
 }
 @Preview(showBackground = true)

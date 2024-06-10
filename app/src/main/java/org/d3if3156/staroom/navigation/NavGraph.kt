@@ -1,12 +1,15 @@
 package org.d3if3156.staroom.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import org.d3if3156.staroom.network.UserDataStore
 import org.d3if3156.staroom.ui.screen.AboutScreen
 import org.d3if3156.staroom.ui.screen.DetailScreen
 import org.d3if3156.staroom.ui.screen.DeveloperScreen
@@ -18,10 +21,12 @@ import org.d3if3156.staroom.ui.screen.NotificationScreen
 import org.d3if3156.staroom.ui.screen.SplashScreen
 
 @Composable
-fun SetupNavGraph(navController: NavHostController = rememberNavController()) {
+fun SetupNavGraph(navController: NavHostController = rememberNavController(), userDataStore: UserDataStore) {
+    val isLoggedIn by userDataStore.isLoggedInFlow.collectAsState(initial = false)
+
     NavHost(
         navController = navController,
-        startDestination = Screen.Splash.route
+        startDestination = if (isLoggedIn) Screen.Home.route else Screen.Splash.route
     ) {
         composable(route = Screen.Splash.route) {
             SplashScreen(navController)

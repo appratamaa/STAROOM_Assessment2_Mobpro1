@@ -53,4 +53,7 @@
     <string name="gambar">Gambar</string>
     <string name="invalidnakostar">Nama dan Zodiak tidak boleh kosong!</string>
     <string name="masukdengangoogle">Masuk dengan Google</string>
+    <string name="tutup">Tutup</string>
+    <string name="keluar">Keluar</string>
+    <string name="profil">Profil</string>
 </resources>

@@ -3,6 +3,7 @@ package org.d3if3156.staroom.network
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -19,7 +20,9 @@ class UserDataStore(private val context: Context) {
         private val USER_NAME = stringPreferencesKey("name")
         private val USER_EMAIL = stringPreferencesKey("email")
         private val USER_PHOTO = stringPreferencesKey("photoUrl")
+        private val IS_LOGGED_IN = booleanPreferencesKey("is_logged_in")
     }
+
     val userFlow: Flow<User> = context.dataStore.data.map { preferences ->
         User(
             name = preferences[USER_NAME] ?: "",
@@ -27,11 +30,17 @@ class UserDataStore(private val context: Context) {
             photoUrl = preferences[USER_PHOTO] ?: ""
         )
     }
-    suspend fun saveData(user: User) {
+
+    val isLoggedInFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[IS_LOGGED_IN] ?: false
+    }
+
+    suspend fun saveData(user: User, isLoggedIn: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[USER_NAME] = user.name
             preferences[USER_EMAIL] = user.email
             preferences[USER_PHOTO] = user.photoUrl
+            preferences[IS_LOGGED_IN] = isLoggedIn
         }
     }
 }

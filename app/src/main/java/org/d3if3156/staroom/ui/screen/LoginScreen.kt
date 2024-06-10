@@ -41,10 +41,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.GetCredentialResponse
+import androidx.credentials.exceptions.ClearCredentialException
 import androidx.credentials.exceptions.GetCredentialException
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -55,6 +57,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.d3if3156.staroom.BuildConfig
 import org.d3if3156.staroom.R
 import org.d3if3156.staroom.model.User
@@ -105,10 +108,17 @@ fun LoginScreen(navController: NavHostController) {
                         coroutineScope.launch {
                             rotation += 360f
                             if (user.email.isEmpty()) {
-                                CoroutineScope(Dispatchers.IO).launch { signIn(context, dataStore) }
-                            }
-                            else {
+                                val result = withContext(Dispatchers.IO) {
+                                    signIn(context, dataStore)
+                                }
+                                if (result) {
+                                    navController.navigate(Screen.Home.route)
+                                } else {
+                                    Log.d("SIGN-IN", "Sign in failed")
+                                }
+                            } else {
                                 Log.d("SIGN-IN", "User: $user")
+                                navController.navigate(Screen.Home.route)
                             }
                         }
                     }
@@ -116,26 +126,29 @@ fun LoginScreen(navController: NavHostController) {
         }
     }
 }
-private suspend fun signIn(context: Context, dataStore: UserDataStore) {
-    val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
+private suspend fun signIn(context: Context, dataStore: UserDataStore): Boolean {
+    val googleIdOption = GetGoogleIdOption.Builder()
         .setFilterByAuthorizedAccounts(false)
         .setServerClientId(BuildConfig.API_KEY)
         .build()
 
-    val request: GetCredentialRequest = GetCredentialRequest.Builder()
+    val request = GetCredentialRequest.Builder()
         .addCredentialOption(googleIdOption)
         .build()
-    try {
+    return try {
         val credentialManager = CredentialManager.create(context)
         val result = credentialManager.getCredential(context, request)
         handleSignIn(result, dataStore)
+        true
     } catch (e: GetCredentialException) {
         Log.e("SIGN-IN", "Error: ${e.errorMessage}")
+        false
     }
 }
 private suspend fun handleSignIn(
     result: GetCredentialResponse,
-    dataStore: UserDataStore) {
+    dataStore: UserDataStore
+) {
     val credential = result.credential
     if (credential is CustomCredential &&
         credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
@@ -144,13 +157,23 @@ private suspend fun handleSignIn(
             val nama = googleId.displayName ?: ""
             val email = googleId.id
             val photoUrl = googleId.profilePictureUri.toString()
-            dataStore.saveData(User(nama, email, photoUrl))
+            dataStore.saveData(User(nama, email, photoUrl), isLoggedIn = true) // Menambahkan parameter isLoggedIn
         } catch (e: GoogleIdTokenParsingException) {
             Log.e("SIGN-IN", "Error: ${e.message}")
         }
-    }
-    else {
+    } else {
         Log.e("SIGN-IN", "Error: unrecognized custom credential type.")
+    }
+}
+private suspend fun signOut(context: Context, dataStore: UserDataStore) {
+    try {
+        val credentialManager = CredentialManager.create(context)
+        credentialManager.clearCredentialState(
+            ClearCredentialStateRequest()
+        )
+        dataStore.saveData(User(), isLoggedIn = false)
+    } catch (e: ClearCredentialException) {
+        Log.e("SIGN-IN", "Error: ${e.errorMessage}")
     }
 }
 @Preview(showBackground = true)
