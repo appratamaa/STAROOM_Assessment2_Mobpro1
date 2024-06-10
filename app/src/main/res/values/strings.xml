@@ -62,4 +62,5 @@
     <string name="grid">Grid view</string>
     <string name="intro">Hi, what\'s your zodiac sign? Come on, predict yourself!</string>
     <string name="invalidnakostar">Name and Zodiac cannot be empty!</string>
+    <string name="masukdengangoogle">Login with Google</string>
 </resources>

@@ -1,6 +1,8 @@
 package org.d3if3156.staroom.ui.screen
 
+import android.content.Context
 import android.content.res.Configuration
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -50,16 +52,27 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.credentials.CredentialManager
+import androidx.credentials.CustomCredential
+import androidx.credentials.GetCredentialRequest
+import androidx.credentials.GetCredentialResponse
+import androidx.credentials.exceptions.GetCredentialException
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.d3if3156.staroom.BuildConfig
 import org.d3if3156.staroom.R
 import org.d3if3156.staroom.database.StarDb
 import org.d3if3156.staroom.model.Star
+import org.d3if3156.staroom.model.User
 import org.d3if3156.staroom.navigation.Screen
+import org.d3if3156.staroom.network.UserDataStore
 import org.d3if3156.staroom.ui.theme.STAROOMTheme
 import org.d3if3156.staroom.util.SettingsDataStore
 import org.d3if3156.staroom.util.ViewModelFactory

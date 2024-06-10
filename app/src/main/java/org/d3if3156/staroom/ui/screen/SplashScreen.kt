@@ -33,7 +33,7 @@ fun SplashScreen(navController: NavHostController) {
     DisposableEffect(Unit) {
         coroutineScope.launch {
             delay(1200)
-            navController.navigate(Screen.Home.route)
+            navController.navigate(Screen.Login.route)
         }
         onDispose { }
     }

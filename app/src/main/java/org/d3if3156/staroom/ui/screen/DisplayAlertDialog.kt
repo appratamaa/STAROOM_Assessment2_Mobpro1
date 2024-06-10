@@ -24,7 +24,8 @@ fun DisplayAlertDialog(
 
         AlertDialog(
             text = { Text(text = stringResource(R.string.pesanhapus),
-                fontFamily = poppinsregular) },
+                fontFamily = poppinsregular)
+           },
             confirmButton = {
                 TextButton(onClick = { onConfirmation() }) {
                     Text(text = stringResource(R.string.tombolhapus),

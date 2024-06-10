@@ -11,6 +11,7 @@ import org.d3if3156.staroom.ui.screen.AboutScreen
 import org.d3if3156.staroom.ui.screen.DetailScreen
 import org.d3if3156.staroom.ui.screen.DeveloperScreen
 import org.d3if3156.staroom.ui.screen.KEY_ID_STAR
+import org.d3if3156.staroom.ui.screen.LoginScreen
 import org.d3if3156.staroom.ui.screen.MainScreen
 import org.d3if3156.staroom.ui.screen.NakostarScreen
 import org.d3if3156.staroom.ui.screen.NotificationScreen
@@ -51,6 +52,9 @@ fun SetupNavGraph(navController: NavHostController = rememberNavController()) {
         }
         composable(route = Screen.Developer.route) {
             DeveloperScreen(navController)
+        }
+        composable(route = Screen.Login.route) {
+            LoginScreen(navController)
         }
     }
 }
