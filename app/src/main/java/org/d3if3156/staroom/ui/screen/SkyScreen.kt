@@ -158,7 +158,7 @@ fun SkyScreen(navController: NavHostController) {
                         Icon(
                             painter = painterResource(
                                 if (showList) R.drawable.baseline_grid_view_24
-                                else R.drawable.baseline_view_list_24
+//                                else R.drawable.baseline_view_list_24
                             ),
                             contentDescription = stringResource(
                                 if (showList) R.string.grid
