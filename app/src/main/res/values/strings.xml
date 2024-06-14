@@ -66,4 +66,10 @@
     <string name="tutup">Close</string>
     <string name="keluar">Logout</string>
     <string name="profil">Profile</string>
+    <string name="picture">Picture %1$s</string>
+    <string name="error">Failed to load data.. Connection error.</string>
+    <string name="try_again">Try again</string>
+    <string name="tambah_rasi">Add constellations/sky</string>
+    <string name="namarasi">Constellation names</string>
+    <string name="daerahdifoto">Sky area photographed</string>
 </resources>

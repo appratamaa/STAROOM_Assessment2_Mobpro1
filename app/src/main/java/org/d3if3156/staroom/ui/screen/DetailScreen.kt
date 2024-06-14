@@ -1,5 +1,7 @@
 package org.d3if3156.staroom.ui.screen
 
+import android.app.DatePickerDialog
+import android.content.Context
 import android.content.res.Configuration
 import android.widget.Toast
 import androidx.compose.foundation.clickable
@@ -35,6 +37,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -54,6 +59,9 @@ import org.d3if3156.staroom.R
 import org.d3if3156.staroom.database.StarDb
 import org.d3if3156.staroom.ui.theme.STAROOMTheme
 import org.d3if3156.staroom.util.ViewModelFactory
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 const val KEY_ID_STAR = "idStar"
 
@@ -191,41 +199,48 @@ fun FormStar(
     modifier: Modifier
 ) {
     val poppinsregular = FontFamily(Font(R.font.poppinsregular))
+    val focusRequester = remember { FocusRequester() }
+    val context = LocalContext.current
 
     LazyColumn(
-        modifier = modifier
-            .fillMaxSize()
+        modifier = modifier.fillMaxSize()
             .padding(16.dp)
     ) {
         item {
             OutlinedTextField(
                 value = title,
                 onValueChange = { onTitleChange(it) },
-                label = { Text(text = stringResource(R.string.nama),
-                    fontFamily = poppinsregular) },
+                label = {
+                    Text(
+                        text = stringResource(R.string.nama),
+                        fontFamily = poppinsregular
+                    )
+                },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
                     capitalization = KeyboardCapitalization.Words,
                     imeAction = ImeAction.Next
                 ),
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 1.dp), // Ubah nilai padding di sini
                 textStyle = TextStyle(fontFamily = poppinsregular)
             )
             OutlinedTextField(
                 value = desc,
                 onValueChange = { onDesChange(it) },
-                label = { Text(text = stringResource(R.string.tanggal),
-                    fontFamily = poppinsregular) },
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Words,
-                    imeAction = ImeAction.Done
-                ),
+                label = {
+                    Text(
+                        text = stringResource(R.string.tanggal),
+                        fontFamily = poppinsregular
+                    )
+                },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 9.dp),
+                    .padding(bottom = 8.dp), // Ubah nilai padding di sini
                 textStyle = TextStyle(fontFamily = poppinsregular)
             )
-            OutlinedCard(
+    OutlinedCard(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(4.dp)
             ) {
@@ -261,6 +276,19 @@ fun FormStar(
             }
         }
     }
+}
+fun showDatePicker(context: Context, onDateSelected: (String) -> Unit) {
+    val calendar = Calendar.getInstance()
+    val year = calendar.get(Calendar.YEAR)
+    val month = calendar.get(Calendar.MONTH)
+    val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+    DatePickerDialog(context, { _, selectedYear, monthOfYear, dayOfMonth ->
+        calendar.set(selectedYear, monthOfYear, dayOfMonth)
+        val format = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        val selectedDate = format.format(calendar.time)
+        onDateSelected(selectedDate)
+    }, year, month, day).show()
 }
 @Preview(showBackground = true)
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)

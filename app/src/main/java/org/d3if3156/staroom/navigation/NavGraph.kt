@@ -18,6 +18,7 @@ import org.d3if3156.staroom.ui.screen.LoginScreen
 import org.d3if3156.staroom.ui.screen.MainScreen
 import org.d3if3156.staroom.ui.screen.NakostarScreen
 import org.d3if3156.staroom.ui.screen.NotificationScreen
+import org.d3if3156.staroom.ui.screen.SkyScreen
 import org.d3if3156.staroom.ui.screen.SplashScreen
 
 @Composable
@@ -60,6 +61,9 @@ fun SetupNavGraph(navController: NavHostController = rememberNavController(), us
         }
         composable(route = Screen.Login.route) {
             LoginScreen(navController)
+        }
+        composable(route = Screen.SkyScreen.route) {
+            SkyScreen(navController)
         }
     }
 }

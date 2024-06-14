@@ -56,4 +56,10 @@
     <string name="tutup">Tutup</string>
     <string name="keluar">Keluar</string>
     <string name="profil">Profil</string>
+    <string name="picture">Gambar %1$s</string>
+    <string name="error">Gagal memuat data.. Koneksi error.</string>
+    <string name="try_again">Coba lagi</string>
+    <string name="tambah_rasi">Tambah rasi bintang/langit</string>
+    <string name="namarasi">Nama rasi bintang</string>
+    <string name="daerahdifoto">Daerah langit difoto</string>
 </resources>

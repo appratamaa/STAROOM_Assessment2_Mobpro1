@@ -35,7 +35,6 @@ import org.d3if3156.staroom.R
 import org.d3if3156.staroom.model.User
 import org.d3if3156.staroom.navigation.Screen
 import org.d3if3156.staroom.ui.theme.STAROOMTheme
-import org.jetbrains.annotations.Async
 
 @Composable
 fun ProfilDialog(
